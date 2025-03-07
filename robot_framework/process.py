@@ -315,7 +315,7 @@ def process(orchestrator_connection: OrchestratorConnection, queue_element: Queu
         response.raise_for_status()
 
         # Get response content
-        ResponseOut = json.loads(response.text)
+        ResponseOut = response.text
         AktiviteterSendt += 100
 
         #Vi kører hvis der er aktiviteter
