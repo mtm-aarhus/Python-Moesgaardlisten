@@ -25,11 +25,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-sandbox_dokumentliste.py
-test_password.py
-upload_test.py
-OpusBookMarkPerformer.py
-OpusBookMarkDispatcher.py
+sandbox.py
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
