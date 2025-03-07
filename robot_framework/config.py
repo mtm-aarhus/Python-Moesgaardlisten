@@ -19,7 +19,7 @@ ERROR_EMAIL = "balas"
 # ----------------------
 
 # The name of the job queue (if any)
-QUEUE_NAME = "OpusBookMarkQueue"
+QUEUE_NAME = "NovaOpgaveFlyt"
 
 # The limit on how many queue elements to process
 MAX_TASK_COUNT = 100
