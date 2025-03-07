@@ -88,7 +88,7 @@ def cookie_getter(username, password):
         # Close the browser
         driver.quit()
     except Exception as e:
-       print(e)
+        print(e)
         raise
     return out_verification_token, out_kmd_logon_web_session_handler, out_request_verification_token
 
