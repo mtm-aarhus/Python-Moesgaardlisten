@@ -169,7 +169,7 @@ def process(orchestrator_connection: OrchestratorConnection, queue_element: Queu
 
             # Convert to JSON format
             ResponseOut_caseworker = json.dumps(filtered_caseworker, indent=4)
-            orchestrator_connection.log_info('Output ny caseworker:', ResponseOut_caseworker)
+            orchestrator_connection.log_info(f'Output ny caseworker:{ResponseOut_caseworker}')
         else:
             orchestrator_connection.log_info("No matching caseworker found.")
             raise ValueError("No matching caseworker found.")
@@ -332,7 +332,7 @@ def process(orchestrator_connection: OrchestratorConnection, queue_element: Queu
                 orchestrator_connection.log_info(f'Processing {element}')
                 if SagsNummer not in sagsliste:
                     sagsliste.append(SagsNummer)
-                    orchestrator_connection.log_info('Nyt sagsnummer processeres', SagsNummer)
+                    orchestrator_connection.log_info(f'Nyt sagsnummer processeres {SagsNummer}')
                     
                     # Construct the API URL
                     url = f"https://cap-awswlbs-wm3q2021.kmd.dk/KMDNovaESDH/api/ServiceRelayer/KMDNova/v1/mainSearch/search?v=3.5.2.0&Id={SagsNummer}&SearchObjectType=Case"
