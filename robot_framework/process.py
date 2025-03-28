@@ -16,7 +16,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.styles import numbers
 from openpyxl.styles import NamedStyle
 
-def process(orchestrator_connection: OrchestratorConnection, queue_element: QueueElement) :
+def process(orchestrator_connection: OrchestratorConnection):
     def sharepoint_client(username: str, password: str, sharepoint_site_url: str) -> ClientContext:
         """
         Creates and returns a SharePoint client context.
