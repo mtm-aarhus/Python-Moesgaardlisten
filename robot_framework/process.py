@@ -81,10 +81,10 @@ def process(orchestrator_connection: OrchestratorConnection):
     previous_week_number = previous_week_start_date.isocalendar()[1]
 
     # orchestrator_connection.log_infoing it
-    orchestrator_connection.log_info("Current Date:", current_date.strftime("%d/%m/%Y"))
-    orchestrator_connection.log_info("Current Week Number:", current_week_number)
-    orchestrator_connection.log_info("Previous Week Start Date:", previous_week_start_date.strftime("%d/%m/%Y"))
-    orchestrator_connection.log_info("Previous Week Number:", previous_week_number)
+    orchestrator_connection.log_info(f"Current Date: {current_date.strftime("%d/%m/%Y")}")
+    orchestrator_connection.log_info(f"Current Week Number: {current_week_number}")
+    orchestrator_connection.log_info(f"Previous Week Start Date: {previous_week_start_date.strftime("%d/%m/%Y")}")
+    orchestrator_connection.log_info(f"Previous Week Number: {previous_week_number}")
 
     #Setting date according to weekday
     today = datetime.today()
@@ -109,7 +109,7 @@ def process(orchestrator_connection: OrchestratorConnection):
 
     # Replace placeholders with actual date values, ensuring they are formatted correctly
     query = query.replace("@datoFra", f"{DatoFra}").replace("@datoTil", f"{DatoTil}")  # Add single quotes
-    orchestrator_connection.log_info("Executing SQL query:\n", query)
+    orchestrator_connection.log_info(f"Executing SQL query:\n {query}")
 
     # Database connection setup
     sql_server = orchestrator_connection.get_constant("SqlServer").value
