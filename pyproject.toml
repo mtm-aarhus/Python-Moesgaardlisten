@@ -20,8 +20,9 @@ dependencies = [
     "pandas == 2.2.3",
     "Office365-REST-Python-Client == 2.5.14",
     "Pillow == 10.*",
-    "selenium == 4.27.1",
-    "requests == 2.32.3"
+    "openpyxl == ",
+    "pyodbc == 5.2.0"
+
 ]
 
 

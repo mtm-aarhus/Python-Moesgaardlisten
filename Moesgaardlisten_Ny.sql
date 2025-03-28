@@ -1,5 +1,3 @@
-USE LOIS
-
 SELECT DISTINCT
 	TRIM(sag.Sagsnummer) 'Sagsnummer'
 	,convert(date,sag.Sagsdato) 'Sagsdato'
