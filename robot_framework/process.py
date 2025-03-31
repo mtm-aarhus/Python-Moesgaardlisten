@@ -126,11 +126,10 @@ def process(orchestrator_connection: OrchestratorConnection):
 
     # Step 4: Load the data into a Pandas DataFrame
     data = pd.read_sql(query, conn)
-    orchestrator_connection.log_info(data.head())
 
     # Step 5: Close database connection
     cursor.close()
-    conn.close()
+    conn.close() 
 
     # Sikrer at 'Sagsdato' er datetime-type
     data['Sagsdato'] = pd.to_datetime(data['Sagsdato'], errors='coerce')
