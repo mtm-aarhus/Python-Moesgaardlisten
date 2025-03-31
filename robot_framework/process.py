@@ -113,7 +113,7 @@ def process(orchestrator_connection: OrchestratorConnection):
 
     # Database connection setup
     sql_server = orchestrator_connection.get_constant("SqlServer").value
-    conn_str = 'DRIVER={SQL Server};' + f'SERVER={sql_server};DATABASE=LOIS;Trusted_Connection=yes'
+    conn_str = 'DRIVER={ODBC Driver 17 for SQL Server};' + f'SERVER={sql_server};DATABASE=LOIS;Trusted_Connection=yes'
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
 
