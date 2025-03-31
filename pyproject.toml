@@ -21,7 +21,8 @@ dependencies = [
     "Office365-REST-Python-Client == 2.5.14",
     "Pillow == 10.*",
     "pyodbc == 5.2.0",
-    "openpyxl == 3.1.5"
+    "openpyxl == 3.1.5",
+    "XlsxWriter == 3.2.2"
 
 ]
 
