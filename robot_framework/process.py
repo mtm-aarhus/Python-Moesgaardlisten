@@ -126,6 +126,10 @@ def process(orchestrator_connection: OrchestratorConnection):
 
     # Step 4: Load the data into a Pandas DataFrame
     data = pd.read_sql(query, conn)
+    orchestrator_connection.log_info(f"Data type: {type(data)}")
+    orchestrator_connection.log_info(f"Data columns: {list(data.columns)}")
+    orchestrator_connection.log_info(f"Data shape: {data.shape}")
+    orchestrator_connection.log_info(f"First few rows:\n {data.head()}")
 
     # Step 5: Close database connection
     cursor.close()
