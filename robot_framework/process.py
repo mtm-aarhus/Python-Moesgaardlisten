@@ -122,10 +122,11 @@ def process(orchestrator_connection: OrchestratorConnection):
 
     # Step 3: Fetch results
     rows = cursor.fetchall()
+    orchestrator_connection.log_info(f'rows {rows}')
 
     # Step 4: Load the data into a Pandas DataFrame
     data = pd.read_sql(query, conn)
-    orchestrator_connection.log_info(data)
+    orchestrator_connection.log_info(data.head())
 
     # Step 5: Close database connection
     cursor.close()
