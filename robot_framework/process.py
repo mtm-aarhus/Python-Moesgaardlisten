@@ -162,10 +162,9 @@ def process(orchestrator_connection: OrchestratorConnection):
                 worksheet.set_column(i, i, column_length + 2)
 
         orchestrator_connection.log_info('Overfører excelfil til sharepoint')
-        # file_url = f'{SharepointUrl}/Teams/sec-lukket1752/Delte%20dokumenter'
-        file_url = f'{SharepointUrl}/Teams/tea-teamsite11819/Delte Dokumenter/Testmappe'
-        client = sharepoint_client(username=RobotCredentials.username, password=RobotCredentials.password, sharepoint_site_url= f'{SharepointUrl}/Teams/tea-teamsite11819/' )
-        upload_to_sharepoint(client= client, folder_name = 'Testmappe', file_path=excel_file_path, folder_url= '/Teams/tea-teamsite11819/Delte Dokumenter/Testmappe')
+        file_url = f'{SharepointUrl}/Teams/sec-lukket1752/Delte Dokumenter'
+        client = sharepoint_client(username=RobotCredentials.username, password=RobotCredentials.password, sharepoint_site_url= f'{SharepointUrl}/Teams/sec-lukket1752/' )
+        upload_to_sharepoint(client= client, folder_name = 'Delte Dokumenter', file_path=excel_file_path, folder_url= '/Teams/sec-lukket1752/Delte Dokumenter')
         orchestrator_connection.log_info(f'Uploaded to {file_url}')
 
         # SMTP Configuration (from your provided details)
@@ -191,8 +190,8 @@ def process(orchestrator_connection: OrchestratorConnection):
         </html>
         """
         # Create the email message
-        to_address = orchestrator_connection.get_constant('balas').value
-        UdviklerMail = to_address
+        to_address = orchestrator_connection.get_constant('UdviklerMailAktbob').value
+        UdviklerMail = orchestrator_connection.get_constant('balas').value
         msg = EmailMessage()
         msg['To'] = ', '.join(to_address) if isinstance(to_address, list) else to_address
         msg['From'] = SCREENSHOT_SENDER
