@@ -17,19 +17,25 @@ from openpyxl.styles import numbers
 from openpyxl.styles import NamedStyle
 
 def process(orchestrator_connection: OrchestratorConnection):
-    def sharepoint_client(username: str, password: str, sharepoint_site_url: str) -> ClientContext:
+    def sharepoint_client(tenant: str, client_id: str, thumbprint: str, cert_path: str, sharepoint_site_url: str, orchestrator_connection: OrchestratorConnection) -> ClientContext:
         """
         Creates and returns a SharePoint client context.
         """
         # Authenticate to SharePoint
-        ctx = ClientContext(sharepoint_site_url).with_credentials(UserCredential(username, password))
+        cert_credentials = {
+            "tenant": tenant,
+            "client_id": client_id,
+            "thumbprint": thumbprint,
+            "cert_path": cert_path
+        }
+        ctx = ClientContext(sharepoint_site_url).with_client_certificate(**cert_credentials)
 
         # Load and verify connection
         web = ctx.web
         ctx.load(web)
         ctx.execute_query()
 
-        orchestrator_connection.log_info(f"Authenticated successfully")
+        orchestrator_connection.log_info(f"Authenticated successfully. Site Title: {web.properties['Title']}")
         return ctx
 
     def upload_to_sharepoint(client: ClientContext, folder_name: str, file_path: str, folder_url: str):
@@ -67,7 +73,6 @@ def process(orchestrator_connection: OrchestratorConnection):
                 orchestrator_connection.log_info(f"❌ Error uploading file: {str(e)}")
 
     orchestrator_connection.log_info('Starting process Moesgaardlisten')
-    RobotCredentials = orchestrator_connection.get_credential('RobotCredentials')
     OldTimeStamp = orchestrator_connection.get_constant('MoesgaardlistenTimestamp').value
     SharepointUrl = orchestrator_connection.get_constant('AarhusKommuneSharepoint').value
 
@@ -163,7 +168,17 @@ def process(orchestrator_connection: OrchestratorConnection):
 
         orchestrator_connection.log_info('Overfører excelfil til sharepoint')
         file_url = f'{SharepointUrl}/Teams/sec-lukket1752/Delte Dokumenter'
-        client = sharepoint_client(username=RobotCredentials.username, password=RobotCredentials.password, sharepoint_site_url= f'{SharepointUrl}/Teams/sec-lukket1752/' )
+        
+        certification = orchestrator_connection.get_credential("SharePointCert")
+        api = orchestrator_connection.get_credential("SharePointAPI")
+        
+        tenant = api.username
+        client_id = api.password
+        thumbprint = certification.username
+        cert_path = certification.password
+        
+        client = sharepoint_client(tenant, client_id, thumbprint, cert_path, f'{SharepointUrl}/Teams/sec-lukket1752/', orchestrator_connection)
+
         upload_to_sharepoint(client= client, folder_name = 'Delte Dokumenter', file_path=excel_file_path, folder_url= '/Teams/sec-lukket1752/Delte Dokumenter')
         orchestrator_connection.log_info(f'Uploaded to {file_url}')
 
