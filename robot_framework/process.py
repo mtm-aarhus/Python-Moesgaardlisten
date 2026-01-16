@@ -51,10 +51,6 @@ def process(orchestrator_connection: OrchestratorConnection):
                 # Extract file name safely
                 file_name = os.path.basename(file_path)
 
-                # Define the SharePoint document library structure
-                document_library = f"{folder_url.split('/', 1)[-1]}/Delte Dokumenter/Aktindsigter"
-                folder_path = f"{document_library}/{folder_name}"
-
                 # Read file into memory (Prevents closed file issue)
                 with open(file_path, "rb") as file:
                     file_content = file.read()  
@@ -67,7 +63,6 @@ def process(orchestrator_connection: OrchestratorConnection):
                 
                 # Execute request
                 client.execute_query()
-                orchestrator_connection.log_info(f"✅ Successfully uploaded: {file_name} to {folder_path}")
 
             except Exception as e:
                 orchestrator_connection.log_info(f"❌ Error uploading file: {str(e)}")
